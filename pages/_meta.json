@@ -1,15 +1,16 @@
 {
-  "index": "Introduction",
-  "another": "Another Page",
-  "advanced": "Advanced (A Folder)",
-  "about": {
-    "title": "About",
-    "type": "page"
-  },
+  "index": "Home",
+  "gettingStarted": "Getting started",
+  "stripe": "Stripe",
+  "creditsSystem": "Credits system",
+  "auth": "Auth",
+  "mailingList": "Mailing List",
+  "namingConventions": "Naming conventions",
+
   "contact": {
     "title": "Contact ↗",
     "type": "page",
-    "href": "https://twitter.com/shuding_",
+    "href": "https://twitter.com/nytoraja",
     "newWindow": true
   }
 }

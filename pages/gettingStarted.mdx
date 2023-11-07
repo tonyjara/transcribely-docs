@@ -1,0 +1,61 @@
+# Getting started
+
+## Setup 
+
+Depending on your preferred providers you'll have to configure the app differently before you can start using this starter.
+
+The file **.env.mjs** acts as a guard to make sure that you always have the required environments for development, as well as for production. Any missing environment in production will cause builds to fail.
+
+Rename the **.env.example** to **.env** . Inside this file you can have an overview of the necessary pieces to make the application work. Through this documentation we will cover all the steps necessary to deploy this application.
+
+### Constants
+
+Inside the **Constants.ts** file you can change all the site data to match your branding and preferences.
+
+- __Sitedata__: Is where you add your app info. Changes here will be reflected throughout the app. Including email templates, hero, privacy policy and terms of service. After updating the constants to match your app's name, also update your app name in the site.webmanifest.json
+
+- __AppOptions__: Depending on what options you choose here, the **env.mjs** file will require different variables.
+
+### Database
+
+You can use whatever database is supported by prisma. I recommend [NEON](https://neon.tech/) to get started, it has a free tier and it's easy to get up and going.
+Make sure to use a provider that allows for pooling connections. Neon does this and it's easy to configure. For example, using PostgreSQL in Azure would require enabling __pgbouncer__. When using pooled connections, __DIRECT_URL__ is required for migrations. Check [prisma's docs](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/connection-pool) for more info.
+
+
+## Installation
+Choose your favorite package manager and install the dependencies. I like pnpm because it's fast and reliable. Vercel also supports pnpm.
+```bash
+pnpm i
+```
+
+To create your first migration and transfer the schema to your db run 
+```bash
+npx prisma migrate dev --name first 
+```
+
+### Development
+
+To run the app in development mode:
+
+```bash
+pnpm dev
+```
+This script runs a linter in parallel to get a better experience with typescript.
+
+
+### Creating an admin user
+
+Admin users have access to the coupons, admin panel and the admin settings.
+
+During development all new users are going to default to ADMIN users. You can later edit a users role inside the admin/users page. 
+
+To create an admin user in production you first need to create a regular user. To do so just go through the signup process. After your regular user is created you'll have to manually change the role to admin directly in your database with any DB editor.
+
+I recommend simply running **npx prisma studio** and editing the account from there.
+After changing the role, re login to get updated permissions.
+
+### Editing SEO
+
+To manage tags such as the title, head or description search for the 'MetaTagsComponent'. This file should be present inside any page that could be indexed by search engines. Such as the main page and the pricing page.
+
+
