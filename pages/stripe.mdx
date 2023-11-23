@@ -2,18 +2,20 @@
 
 ## Setting up Stripe
 
-__Pre requisites:__
-- Have a stripe account. You don't need production access yet. Just make sure you're able to access the developer page. 
+**Pre requisites:**
+
+- Have a stripe account. You don't need production access yet. Just make sure you're able to access the developer page.
 - Install stripe globally
 
 First make sure you have all 3 of the necessary environment variables.
+
 #### 1- Secret key
 
 Visit [this url](https://dashboard.stripe.com/test/apikeys), and copy your secret key to your .env file.
 
 #### 2- Webhook secret
 
-Go to the [webhooks section](https://dashboard.stripe.com/test/webhooks) click the __add local listener__ button and follow the instructions.
+Go to the [webhooks section](https://dashboard.stripe.com/test/webhooks) click the **add local listener** button and follow the instructions.
 
 Add the webhook secret you get from step 2 to your .env file.
 
@@ -27,5 +29,6 @@ pnpm stripe:listen
 
 #### 3- Customer portal
 
-The customer portal is an amazing way to give your customers access and control of their subscription. It's free and it saves us from handling things like canceling their subscription. To get a link to access the customer portal type customer portal in stripe's search bar. Activate test link. Then copy the link to the .env file.
+![portal](/assets/customer-portal.jpeg)
 
+The customer portal is an amazing way to give your customers access and control of their subscription. It's free and it saves us from handling things like canceling their subscription. To get a link to access the customer portal type customer portal in stripe's search bar. Activate test link. Then copy the link to the .env file.

@@ -1,15 +1,19 @@
 import React from "react";
 import { DocsThemeConfig } from "nextra-theme-docs";
+import Image from "next/image";
 
 const config: DocsThemeConfig = {
-  logo: <span>Transcribely Docs</span>,
-  /* project: { */
-  /*   link: 'https://github.com/shuding/nextra-docs-template', */
-  /* }, */
-  /* chat: { */
-  /*   link: "https://discord.com", */
-  /* }, */
-  /* docsRepositoryBase: 'https://github.com/shuding/nextra-docs-template', */
+  logo: (
+    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+      <Image alt="Logo" src="/white-logo.png" width="15" height="15" />
+      <span>Transcribely Docs</span>
+    </div>
+  ),
+  nextThemes: {
+    defaultTheme: "dark",
+    forcedTheme: "dark",
+  },
+  darkMode: true,
   footer: {
     text: (
       <div style={{ display: "flex", gap: "20px" }}>

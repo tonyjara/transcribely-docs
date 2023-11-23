@@ -2,37 +2,39 @@
 
 This started is setup to handle subscriptions, and measured products. Measured products are products that are charged based on usage. For example, if you're using a transcription service, you're charged based on the amount of minutes you use. This is a key aspect to understand how stripe is integrated throughout the app.
 
-
 ### Identifying products and prices
-There are 2 enums that we have to adapt depending on what plans and products we're offering. 
-- __PlanType__ is added to a user's subscription, and allows us to correctly assign credits depending on a user's plan. Inside the __StripeUsageUtils__ page we can find a function called __creditsPerPlan__ where we can see how this logic is applied.
 
-- __StripePriceTag__:  In order to charge our user's for their api usage. Stripe requires us to send the user's usage to their api. This then accumulates throughout the user's billing cycle. In order for us to keep track of the user's usage, we have a table called __SubscriptionCreditsActions__. This is where all the user's usage is stored. The __StripePriceTag__ is how we differentiate what api's, or prices they're related too.
-For an example on how the __StripePriceTag__ is used, please check the __CreditsUsageUtils__ file.
+![Pricetag and plan price](/assets/pricetag.jpeg)
+
+There are 2 enums that we have to adapt depending on what plans and products we're offering.
+
+- **PlanType** is added to a user's subscription, and allows us to correctly assign credits depending on a user's plan. Inside the **StripeUsageUtils** page we can find a function called **creditsPerPlan** where we can see how this logic is applied.
+
+- **StripePriceTag**: In order to charge our user's for their api usage. Stripe requires us to send the user's usage to their api. This then accumulates throughout the user's billing cycle. In order for us to keep track of the user's usage, we have a table called **SubscriptionCreditsActions**. This is where all the user's usage is stored. The **StripePriceTag** is how we differentiate what api's, or prices they're related too.
+  For an example on how the **StripePriceTag** is used, please check the **CreditsUsageUtils** file.
 
 For more information on how the credits are handled, please check the [Credits System](/creditsSystem) docs.
 
 ### Creating Stripe products
 
-__If you already have products:__ or you rather use the stripe product builder, you can use the "introspect" button inside the stripe/products page inside the admin pages. This is also useful when developing and you want to wipe your database. Since most of the product information is stored in stripe.
+**If you already have products:** or you rather use the stripe product builder, you can use the "introspect" button inside the stripe/products page inside the admin pages. This is also useful when developing and you want to wipe your database. Since most of the product information is stored in stripe.
 
-__To create a product__ you need to login with a user with an admin role. Navigate to the admin/stripe/products page. Press the create button and fill in the form. This will create a product with a default price. The default price is __the subscription price__ And it's assigned a __PLAN_FEE__ tag.
+**To create a product** you need to login with a user with an admin role. Navigate to the admin/stripe/products page. Press the create button and fill in the form. This will create a product with a default price. The default price is **the subscription price** And it's assigned a **PLAN_FEE** tag.
 
 After you've created your product you could keep adding more prices to that product. For example, if you see the pricing page at [Transcribely.io](https://transcribely.io), you can see that we offer a PayAsYouGo tier. All of the offerings there are measured products I added as "prices" inside a product.
 
-__There's no need to create a product for a free plan, since the free plan is not related to Stripe in any way.__
+**There's no need to create a product for a free plan, since the free plan is not related to Stripe in any way.**
 
 **Observations:** Stripe has an amazing documentation, please make sure to check it out. I also encourage you to test and try your products as much as you can before going to production. Altering things like prices are very troublesome with a production app.
 
 ### Creating stripe prices
 
-To create stripe prices first create a product from the stripe/products page. Once you create a stripe product you'll see the option to add a price. 
+To create stripe prices first create a product from the stripe/products page. Once you create a stripe product you'll see the option to add a price.
 Using Transcribely as an example, one of the products that it offers is audio transcription. This is charged by minute, so inside our Product, I've added "Audio Transcription Per minute" as a price.
 Whenever you're adding prices this will be displayed in the product pricing card accordingly. This way your pricing card is always up to date.
 
-Whenever we're talking about money in stripe, we need to be aware that stripe treats every currencies smallest amount as a unit. This means in the case of the US dollar, that one unit is 1 cent, and 100 units will be one dollar. 
+Whenever we're talking about money in stripe, we need to be aware that stripe treats every currencies smallest amount as a unit. This means in the case of the US dollar, that one unit is 1 cent, and 100 units will be one dollar.
 
-__However__, since this starter only uses dollars, to keep things simple whenever we're dealing with highly fractional prices, which is usually the case when using external api's, I've decided to handle the conversion so that whenever we're creating prices we can fill in the prices normally.
+**However**, since this starter only uses dollars, to keep things simple whenever we're dealing with highly fractional prices, which is usually the case when using external api's, I've decided to handle the conversion so that whenever we're creating prices we can fill in the prices normally.
 
-__Please consider the previous information if you're planning on adding your own logic.__
-
+**Please consider the previous information if you're planning on adding your own logic.**
