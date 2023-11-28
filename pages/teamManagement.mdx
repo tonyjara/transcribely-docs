@@ -1,0 +1,32 @@
+# Team Management
+
+For admins, the team management page is where you can add, edit, and deactivate users from your team. You can also assign roles to users, which will determine what they can do in the app.
+
+## Adding a User 
+
+If you go to the users page, found in the left sidebar under admin, you will see a list of all the users on the platform. To add a new user, click the "Invite Team Member" next to the table header.
+
+
+![Create team user](/assets/team.jpeg)
+
+## Deactivating a user
+
+To deactivate a user, click on the row of the user you want to deactivate. This will open a menu where you can select the deactivate the user option.
+
+## Editing a role
+
+To edit a user's role, click on the row of the user you want to edit. This will open a menu where you can select the edit option. After selecting the edit option a modal will open where you can select the role you want to assign to the user.
+
+
+## Adding new roles 
+
+To add new roles you first need to edit the Schema. There's an enum called "Role" that holds all the roles. After that you can add the new role options inside SelectOptions file.
+
+
+## Editing role permissions
+
+We can easily change the access and permission of each role in 2 places.
+
+1. __The middleware page:__ this page checks every request and makes sure that the user has the right permissions to access the page.
+
+2. __The sidebarLinks page:__, this page checks what routes are displayed to each user based on their role.
